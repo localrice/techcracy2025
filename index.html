@@ -1,14 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Techracy 2025</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h1>2025</h1>
-        <h2>techracy</h2>
+        <h2 id="glitch-text">
+            <span class="glitch-layer" id="glitch-main">TECHRACY</span>
+            <span class="glitch-layer glitch-r">TECHRACY</span>
+            <span class="glitch-layer glitch-b">TECHRACY</span>
+        </h2>
     </header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+    #glitch-text {
+        position: relative;
+        display: inline-block;
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    .glitch-layer {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        pointer-events: none;
+        user-select: none;
+    }
+    #glitch-main {
+        position: relative;
+        color: #fff;
+        z-index: 3;
+        pointer-events: auto;
+        user-select: auto;
+    }
+    .glitch-r {
+        color: #f0f;
+        z-index: 2;
+        opacity: 0.7;
+        text-shadow: 2px 0 6px #f0f, 0 0 12px #f0f;
+        mix-blend-mode: lighten;
+    }
+    .glitch-b {
+        color: #0ff;
+        z-index: 1;
+        opacity: 0.7;
+        text-shadow: -2px 0 6px #0ff, 0 0 12px #0ff;
+        mix-blend-mode: lighten;
+    }
+    </style>
+    <script>
+    // Cyberpunk entrance animation
+    window.addEventListener('DOMContentLoaded', () => {
+        const glitchText = document.getElementById('glitch-text');
+        const main = document.getElementById('glitch-main');
+        const r = document.querySelector('.glitch-r');
+        const b = document.querySelector('.glitch-b');
+        if (!glitchText || !main || !r || !b) return;
+
+        // Animate the group: fade in, scale up, flicker colors
+        anime.timeline()
+            .add({
+                targets: '#glitch-text',
+                opacity: [0, 1],
+                scale: [0.8, 1.05],
+                easing: 'easeOutExpo',
+                duration: 600
+            })
+            .add({
+                targets: '#glitch-text',
+                scale: [1.05, 1],
+                easing: 'easeOutBack',
+                duration: 300
+            }, '-=200')
+            .add({
+                targets: [main, r, b],
+                opacity: [
+                    { value: 0.6, duration: 60 },
+                    { value: 1, duration: 60 },
+                    { value: 0.8, duration: 60 },
+                    { value: 1, duration: 60 }
+                ],
+                easing: 'steps(2)',
+                duration: 240
+            }, '-=200');
+    });
+
+    // Cyberpunk glitch effect using anime.js and CSS
+    function cyberpunkGlitch() {
+        const r = document.querySelector('.glitch-r');
+        const b = document.querySelector('.glitch-b');
+        const main = document.getElementById('glitch-main');
+        if (!r || !b || !main) return;
+
+        function doGlitch() {
+            anime({
+                targets: r,
+                translateX: [
+                    { value: anime.random(-8, 8), duration: 40 },
+                    { value: anime.random(-16, 16), duration: 40 },
+                    { value: 0, duration: 60 }
+                ],
+                translateY: [
+                    { value: anime.random(-2, 2), duration: 40 },
+                    { value: anime.random(-4, 4), duration: 40 },
+                    { value: 0, duration: 60 }
+                ],
+                opacity: [
+                    { value: 1, duration: 40 },
+                    { value: 0.7, duration: 40 },
+                    { value: 0.7, duration: 60 }
+                ],
+                easing: 'steps(2)',
+                complete: () => {}
+            });
+            anime({
+                targets: b,
+                translateX: [
+                    { value: anime.random(-8, 8), duration: 40 },
+                    { value: anime.random(-16, 16), duration: 40 },
+                    { value: 0, duration: 60 }
+                ],
+                translateY: [
+                    { value: anime.random(-2, 2), duration: 40 },
+                    { value: anime.random(-4, 4), duration: 40 },
+                    { value: 0, duration: 60 }
+                ],
+                opacity: [
+                    { value: 1, duration: 40 },
+                    { value: 0.7, duration: 40 },
+                    { value: 0.7, duration: 60 }
+                ],
+                easing: 'steps(2)',
+                complete: () => {}
+            });
+            anime({
+                targets: main,
+                opacity: [
+                    { value: 0.7, duration: 30 },
+                    { value: 1, duration: 70 }
+                ],
+                easing: 'steps(2)',
+                complete: () => {}
+            });
+            setTimeout(doGlitch, 600 + Math.random() * 400);
+        }
+        doGlitch();
+    }
+    cyberpunkGlitch();
+    </script>
 </body>
 </html>
+
+
