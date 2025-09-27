@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'LapsusProBold';
+    src: url('./fonts/LapsusPro-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
