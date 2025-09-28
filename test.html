@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SVG Morphing with Anime.js — Simple Single File</title>
+
+  <!-- Merriweather font (as in the original) -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i,700&display=swap" rel="stylesheet">
+
+  <!-- Anime.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <style>
+    /* === BASIC (converted from SCSS used in CodePen) === */
+
+    :root{
+      --main-font: "Merriweather", serif;
+      --white: #f2f2f2;
+      --primary: #B66C8D;
+      --transition-fast: 0.4s;
+      --transition-medium: 0.6s;
+    }
+
+    html,body{
+      height: 100%;
+      margin: 0;
+    }
+
+    body{
+      font-family: var(--main-font);
+      font-size: 16px;
+      background: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* SECTION */
+    #my-section{
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* CTA wrapper (centered absolutely) */
+    #wrap-cta{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(0, -50%);
+      opacity: 0;
+      pointer-events: auto;
+    }
+    #wrap-cta.active{
+      z-index: 2;
+      transform: translate(-50%, -50%);
+      transition: transform var(--transition-medium), opacity var(--transition-medium);
+      opacity: 1;
+    }
+
+    /* CTA button */
+    #cta{
+      padding: 1rem 2rem;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 2px solid var(--white);
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: background var(--transition-fast);
+      font-weight: 700;
+      letter-spacing: .04em;
+      background-color: rgba(0,0,0,0.0);
+    }
+    #cta:hover{
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* SVG full-bleed */
+    svg{
+      display: block;
+      width: 100%;
+      height: 100vh;
+    }
+    .polymorph {
+      fill: var(--primary);
+      transition: fill .3s;
+    }
+
+    /* center content overlay */
+    .container{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none; /* until it appears */
+    }
+
+    #content{
+      transform: translateY(-50px);
+      opacity: 0;
+      color: var(--primary);
+      transition: transform var(--transition-medium) .2s, opacity var(--transition-medium) .2s;
+      pointer-events: none;
+    }
+
+    #content.active{
+      z-index: 4;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #content h1{
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+    #content p{
+      margin: .75rem 0 1.5rem;
+      max-width: 34rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* close button */
+    #close{
+      display: inline-block;
+      margin-top: 2rem;
+      padding: .5rem 1rem;
+      text-transform: uppercase;
+      font-size: .9em;
+      color: var(--primary);
+      background: transparent;
+      border: 2px solid var(--primary);
+      border-radius: 5px;
+      cursor: pointer;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: background var(--transition-fast);
+    }
+    #close:hover{
+      background: rgba(182,108,141,0.12);
+    }
+
+    /* small responsive tweaks */
+    @media (max-width:600px){
+      #content h1{ font-size: 1.4rem; }
+      #cta{ padding: .75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <section id="my-section">
+    <!-- CTA overlay -->
+    <div id="wrap-cta" class="active">
+      <button id="cta">Click here, please!</button>
+    </div>
+
+    <!-- SVG that will morph -->
+    <svg viewBox="0 0 215 110" preserveAspectRatio="none" aria-hidden="true">
+      <!-- start shape: a full rectangle (points: 215,110 0,110 0,0 215,0) -->
+      <polygon class="polymorph"
+               points="215,110 0,110 0,0 215,0">
+      </polygon>
+    </svg>
+
+    <!-- content that appears when CTA is clicked -->
+    <div class="container">
+      <div id="content">
+        <h1>Lorem ipsum dolor sit amet</h1>
+        <p>Dolor sit amet et consectquo lorem ipsum dolor sit amet</p>
+        <button id="close">Ok, close me</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // References
+    const wrapCta  = document.querySelector('#wrap-cta'),
+          btnCta   = document.querySelector('#cta'),
+          content  = document.querySelector('#content'),
+          btnClose = document.querySelector('#close'),
+          poly = document.querySelector('.polymorph');
+
+    // Common anime settings for morphing the polygon
+    const common = {
+      targets: '.polymorph',
+      easing: 'easeOutQuad',
+      duration: 600,
+      loop: false
+    };
+
+    // When CTA clicked -> hide CTA, show content and morph the SVG
+    btnCta.addEventListener('click', () => {
+      wrapCta.classList.remove('active');
+      content.classList.add('active');
+
+      // Morph shape to narrower slanted shape
+      anime({
+        ...common,
+        points: [
+          { value: '215,110 0,110 186,86 215,0' }
+        ]
+      });
+    });
+
+    // When close clicked -> revert
+    btnClose.addEventListener('click', () => {
+      content.classList.remove('active');
+      wrapCta.classList.add('active');
+
+      anime({
+        ...common,
+        points: [
+          { value: '215,110 0,110 0,0 215,0' } // rectangle
+        ]
+      });
+    });
+
+    // Accessibility: allow Enter on focused buttons
+    [btnCta, btnClose].forEach(b => {
+      b.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          b.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
