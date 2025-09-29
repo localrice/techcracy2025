@@ -4,16 +4,41 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Techracy 2025</title>
+    <title>Techcracy 2025</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
+      <div class="navigation">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+            <label for="navi-toggle" class="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
+
+            <div class="navigation__background">&nbsp;</div>
+
+            <nav class="navigation__nav">
+                <ul class="navigation__list">
+                    <li class="navigation__item" ><a href="#home" class="navigation__link">Home</a></li>
+                    <li class="navigation__item"><a href="#events" class="navigation__link">Events</a></li>
+                    <li class="navigation__item"><a href="#team" class="navigation__link">Team</a></li>
+                    <li class="navigation__item"><a href="#merchandise" class="navigation__link">MERCHANDISE</a></li>
+
+            </nav>
+            <script>
+        document.querySelectorAll('.navigation__link').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.navigation__checkbox').checked = false;
+    });
+  });
+</script>
+        </div>
+    <header id="home">
         <h1>2025</h1>
         <h2 id="glitch-text">
-            <span class="glitch-layer" id="glitch-main">TECHRACY</span>
-            <span class="glitch-layer glitch-r">TECHRACY</span>
-            <span class="glitch-layer glitch-b">TECHRACY</span>
+            <span class="glitch-layer" id="glitch-main">TECHCRACY</span>
+            <span class="glitch-layer glitch-r">TECHCRACY</span>
+            <span class="glitch-layer glitch-b">TECHCRACY</span>
         </h2>
     </header>
     <section id="events">
