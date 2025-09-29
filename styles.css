@@ -5,11 +5,16 @@
     font-style: normal;
 }
 
+
 @font-face {
     font-family: 'BebasNeue';
     src: url('./fonts/BebasNeue-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+*{
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -17,6 +22,8 @@ body {
     position: relative;
     overflow-x: hidden;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 body::before {
     content: "";
@@ -47,11 +54,11 @@ body::before {
 }
 .navigation__button {
   background-color: #fff;
-  height: 7rem;
-  width: 7rem;
+  height: 3rem;
+  width: 3rem;
   position: fixed;
-  top: 6rem;
-  right: 6rem;
+  top: 3rem;
+  right: 3rem;
   border-radius: 50%;
   z-index: 2000;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
@@ -59,12 +66,12 @@ body::before {
   cursor: pointer;
 }
 .navigation__background {
-  height: 6rem;
-  width: 6rem;
+  height: 3rem;
+  width: 3rem;
   border-radius: 50%;
   position: fixed;
-  top: 6.5rem;
-  right: 6.5rem;
+  top: 3rem;
+  right: 3rem;
   background-image: radial-gradient(#020202, #181818);
   z-index: 1000;
   transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
@@ -123,10 +130,10 @@ body::before {
 }
 .navigation__icon {
   position: relative;
-  margin-top: 3.5rem;
+  margin-top: 1.5rem;
 }
 .navigation__icon, .navigation__icon::before, .navigation__icon::after {
-  width: 2rem;
+  width: 1.5rem;
   height: 2px;
   background-color: #B0BEC5;
   display: inline-block;
@@ -406,3 +413,4 @@ header h2 {
         font-size: 2.5rem;
     }
 }
+
