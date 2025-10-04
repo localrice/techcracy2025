@@ -518,10 +518,9 @@ footer .logo{
     align-items: center;
     padding: 10px;
 }
-footer .logo svg{
-    width: 100px;
-    height: 100px;
-    fill: blue;
+footer .logo img{
+    width: 140px;
+    height: 180px;
 }
 footer .social a, footer .credits a, footer .quicklinks a{
     color: #333;
