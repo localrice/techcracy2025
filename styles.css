@@ -552,7 +552,7 @@ footer .credits p a {
 @media (max-width: 768px) {
     .wrapper {
         grid-template-columns: 2fr;
-        grid-template-rows: 1fr 2fr 1fr 1fr .5fr;
+        grid-template-rows: 1fr 1.5fr 0.5fr .5fr .5fr;
         grid-template-areas:
             "logo logo"
             "info info"
