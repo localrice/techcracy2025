@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Techcracy 2025</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
     <main id="hero">
         <header>
@@ -34,7 +36,8 @@
         <div class="container">
             <div id="content" role="region" aria-live="polite">
                 <h1 id="events-heading">Events</h1>
-                <p>Welcome to Techracy 2025 — a showcase of cutting-edge panels, live demos, and immersive experiences. Scroll through or tap the CTA to explore.</p>
+                <p>Welcome to Techracy 2025 — a showcase of cutting-edge panels, live demos, and immersive experiences.
+                    Scroll through or tap the CTA to explore.</p>
                 <button id="cta">Explore Events</button>
                 <button id="close" hidden>Close</button>
             </div>
@@ -45,283 +48,284 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
     <script>
-    // ----------------------
-    // GLITCH (your existing entrance / glitch behaviour slightly polished)
-    // ----------------------
-    window.addEventListener('DOMContentLoaded', () => {
-        const glitchText = document.getElementById('glitch-text');
-        const main = document.getElementById('glitch-main');
-        const r = document.querySelector('.glitch-r');
-        const b = document.querySelector('.glitch-b');
-        if (!glitchText || !main || !r || !b) return;
+        // ----------------------
+        // GLITCH (your existing entrance / glitch behaviour slightly polished)
+        // ----------------------
+        window.addEventListener('DOMContentLoaded', () => {
+            const glitchText = document.getElementById('glitch-text');
+            const main = document.getElementById('glitch-main');
+            const r = document.querySelector('.glitch-r');
+            const b = document.querySelector('.glitch-b');
+            if (!glitchText || !main || !r || !b) return;
 
-        anime.timeline()
-            .add({
-                targets: '#glitch-text',
-                opacity: [0, 1],
-                scale: [0.8, 1.05],
-                easing: 'easeOutExpo',
-                duration: 600
-            })
-            .add({
-                targets: '#glitch-text',
-                scale: [1.05, 1],
-                easing: 'easeOutBack',
-                duration: 300
-            }, '-=200')
-            .add({
-                targets: [main, r, b],
-                opacity: [
-                    { value: 0.6, duration: 60 },
-                    { value: 1, duration: 60 },
-                    { value: 0.8, duration: 60 },
-                    { value: 1, duration: 60 }
-                ],
-                easing: 'steps(2)',
-                duration: 240
-            }, '-=200');
+            anime.timeline()
+                .add({
+                    targets: '#glitch-text',
+                    opacity: [0, 1],
+                    scale: [0.8, 1.05],
+                    easing: 'easeOutExpo',
+                    duration: 600
+                })
+                .add({
+                    targets: '#glitch-text',
+                    scale: [1.05, 1],
+                    easing: 'easeOutBack',
+                    duration: 300
+                }, '-=200')
+                .add({
+                    targets: [main, r, b],
+                    opacity: [
+                        { value: 0.6, duration: 60 },
+                        { value: 1, duration: 60 },
+                        { value: 0.8, duration: 60 },
+                        { value: 1, duration: 60 }
+                    ],
+                    easing: 'steps(2)',
+                    duration: 240
+                }, '-=200');
 
-        // start glitch loop
-        (function doGlitch() {
-            anime({
-                targets: r,
-                translateX: [
-                    { value: anime.random(-8, 8), duration: 40 },
-                    { value: anime.random(-16, 16), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                translateY: [
-                    { value: anime.random(-2, 2), duration: 40 },
-                    { value: anime.random(-4, 4), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                opacity: [
-                    { value: 1, duration: 40 },
-                    { value: 0.7, duration: 40 },
-                    { value: 0.7, duration: 60 }
-                ],
-                easing: 'steps(2)'
-            });
-            anime({
-                targets: b,
-                translateX: [
-                    { value: anime.random(-8, 8), duration: 40 },
-                    { value: anime.random(-16, 16), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                translateY: [
-                    { value: anime.random(-2, 2), duration: 40 },
-                    { value: anime.random(-4, 4), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                opacity: [
-                    { value: 1, duration: 40 },
-                    { value: 0.7, duration: 40 },
-                    { value: 0.7, duration: 60 }
-                ],
-                easing: 'steps(2)'
-            });
-            anime({
-                targets: main,
-                opacity: [
-                    { value: 0.7, duration: 30 },
-                    { value: 1, duration: 70 }
-                ],
-                easing: 'steps(2)'
-            });
-            setTimeout(doGlitch, 600 + Math.random() * 400);
-        })();
-    });
-
-    // ----------------------
-    // EVENTS: cyberpunk animation + scroll-triggered B/W background
-    // ----------------------
-    (function() {
-        const eventsSection = document.getElementById('events-section');
-        const svg = document.getElementById('events-svg');
-        const polymorphs = document.querySelectorAll('.polymorph');
-        const content = document.getElementById('content');
-        const cta = document.getElementById('cta');
-        const closeBtn = document.getElementById('close');
-        const particleLayer = document.getElementById('particle-layer');
-        let particles = [];
-        let particleLoopId = null;
-        let eventAnimated = false;
-
-        // create a few particles for the neon field
-        function createParticles(count = 18) {
-            particleLayer.innerHTML = '';
-            particles = [];
-            const vbW = 1600, vbH = 900;
-            for (let i=0;i<count;i++) {
-                const cx = Math.random() * vbW;
-                const cy = Math.random() * vbH;
-                const r = 1 + Math.random() * 3;
-                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                circle.setAttribute('cx', cx);
-                circle.setAttribute('cy', cy);
-                circle.setAttribute('r', r);
-                circle.setAttribute('fill', i%2 ? 'rgba(255,0,255,0.9)' : 'rgba(0,255,255,0.9)');
-                circle.setAttribute('class', 'neon-p');
-                particleLayer.appendChild(circle);
-                particles.push(circle);
-            }
-        }
-
-        // subtle floating motion for particles
-        function startParticlesLoop() {
-            if (particleLoopId) return;
-            particleLoopId = setInterval(() => {
-                particles.forEach((p,i) => {
-                    anime({
-                        targets: p,
-                        cx: `+=${anime.random(-8,8)}`,
-                        cy: `+=${anime.random(-6,6)}`,
-                        r: 0.8 + Math.random() * 3.4,
-                        duration: 1000 + Math.random()*1100,
-                        easing: 'easeInOutSine'
-                    });
+            // start glitch loop
+            (function doGlitch() {
+                anime({
+                    targets: r,
+                    translateX: [
+                        { value: anime.random(-8, 8), duration: 40 },
+                        { value: anime.random(-16, 16), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    translateY: [
+                        { value: anime.random(-2, 2), duration: 40 },
+                        { value: anime.random(-4, 4), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    opacity: [
+                        { value: 1, duration: 40 },
+                        { value: 0.7, duration: 40 },
+                        { value: 0.7, duration: 60 }
+                    ],
+                    easing: 'steps(2)'
                 });
-            }, 700);
-        }
-        function stopParticlesLoop() {
-            clearInterval(particleLoopId);
-            particleLoopId = null;
-        }
+                anime({
+                    targets: b,
+                    translateX: [
+                        { value: anime.random(-8, 8), duration: 40 },
+                        { value: anime.random(-16, 16), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    translateY: [
+                        { value: anime.random(-2, 2), duration: 40 },
+                        { value: anime.random(-4, 4), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    opacity: [
+                        { value: 1, duration: 40 },
+                        { value: 0.7, duration: 40 },
+                        { value: 0.7, duration: 60 }
+                    ],
+                    easing: 'steps(2)'
+                });
+                anime({
+                    targets: main,
+                    opacity: [
+                        { value: 0.7, duration: 30 },
+                        { value: 1, duration: 70 }
+                    ],
+                    easing: 'steps(2)'
+                });
+                setTimeout(doGlitch, 600 + Math.random() * 400);
+            })();
+        });
 
-        // main events intro timeline
-        function animateEventsEntrance() {
-            if (eventAnimated) return;
-            eventAnimated = true;
+        // ----------------------
+        // EVENTS: cyberpunk animation + scroll-triggered B/W background
+        // ----------------------
+        (function () {
+            const eventsSection = document.getElementById('events-section');
+            const svg = document.getElementById('events-svg');
+            const polymorphs = document.querySelectorAll('.polymorph');
+            const content = document.getElementById('content');
+            const cta = document.getElementById('cta');
+            const closeBtn = document.getElementById('close');
+            const particleLayer = document.getElementById('particle-layer');
+            let particles = [];
+            let particleLoopId = null;
+            let eventAnimated = false;
 
-            // create particles
-            createParticles(22);
-
-            const tl = anime.timeline({
-                easing: 'easeOutExpo',
-                duration: 700
-            });
-
-            // scanline fade in (gives hologram reveal)
-            tl.add({
-                targets: '.scanline',
-                opacity: [0, 0.12],
-                duration: 500
-            });
-
-            // polymorphs pop and neon glow pulse
-            tl.add({
-                targets: '.polymorph',
-                translateY: [
-                    { value: -20, duration: 400 },
-                    { value: 0, duration: 600 }
-                ],
-                opacity: [0, 1],
-                scale: [
-                    { value: 0.9, duration: 300 },
-                    { value: 1.02, duration: 300 },
-                    { value: 1, duration: 400 }
-                ],
-                delay: anime.stagger(120),
-                duration: 900
-            }, '-=200');
-
-            // a quick neon stroke animation (stroke-dash to make it look electronic)
-            tl.add({
-                targets: '.polymorph',
-                filter: ['blur(6px)', 'blur(0px)'],
-                duration: 900
-            }, '-=700');
-
-            // content reveal
-            tl.add({
-                targets: '#content',
-                translateY: [-50, 0],
-                opacity: [0, 1],
-                duration: 700
-            }, '-=500');
-
-            // CTA micro-bounce & glow loop
-            tl.add({
-                targets: '#cta',
-                translateY: [8, 0],
-                scale: [0.985, 1],
-                duration: 600
-            }, '-=350');
-
-            // launch particle loop when timeline finishes:
-            tl.finished.then(() => startParticlesLoop());
-        }
-
-        // animate continuous subtle neon pulsing on polygons
-        function startNeonPulse() {
-            anime({
-                targets: '.neon-1',
-                translateX: [0, -12, 0],
-                rotate: [-2, 2, -1],
-                duration: 4200,
-                easing: 'easeInOutSine',
-                loop: true
-            });
-            anime({
-                targets: '.neon-2',
-                translateX: [0, 10, 0],
-                rotate: [1, -1.5, 0],
-                duration: 5200,
-                easing: 'easeInOutSine',
-                loop: true
-            });
-
-            // color pulse for neon fill using CSS variable
-            anime({
-                targets: '.polymorph',
-                opacity: [0.8, 1, 0.9],
-                duration: 1600,
-                easing: 'easeInOutSine',
-                direction: 'alternate',
-                loop: true,
-                delay: anime.stagger(200)
-            });
-        }
-
-        // scroll observer toggles: when events enters viewport => desaturate background image
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
-                    // add BW class to body (which will target ::before image)
-                    document.body.classList.add('bw');
-                    // trigger events animation
-                    animateEventsEntrance();
-                    startNeonPulse();
-                } else {
-                    // when leaving events we remove BW (restores color)
-                    document.body.classList.remove('bw');
+            // create a few particles for the neon field
+            function createParticles(count = 18) {
+                particleLayer.innerHTML = '';
+                particles = [];
+                const vbW = 1600, vbH = 900;
+                for (let i = 0; i < count; i++) {
+                    const cx = Math.random() * vbW;
+                    const cy = Math.random() * vbH;
+                    const r = 1 + Math.random() * 3;
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', cx);
+                    circle.setAttribute('cy', cy);
+                    circle.setAttribute('r', r);
+                    circle.setAttribute('fill', i % 2 ? 'rgba(255,0,255,0.9)' : 'rgba(0,255,255,0.9)');
+                    circle.setAttribute('class', 'neon-p');
+                    particleLayer.appendChild(circle);
+                    particles.push(circle);
                 }
+            }
+
+            // subtle floating motion for particles
+            function startParticlesLoop() {
+                if (particleLoopId) return;
+                particleLoopId = setInterval(() => {
+                    particles.forEach((p, i) => {
+                        anime({
+                            targets: p,
+                            cx: `+=${anime.random(-8, 8)}`,
+                            cy: `+=${anime.random(-6, 6)}`,
+                            r: 0.8 + Math.random() * 3.4,
+                            duration: 1000 + Math.random() * 1100,
+                            easing: 'easeInOutSine'
+                        });
+                    });
+                }, 700);
+            }
+            function stopParticlesLoop() {
+                clearInterval(particleLoopId);
+                particleLoopId = null;
+            }
+
+            // main events intro timeline
+            function animateEventsEntrance() {
+                if (eventAnimated) return;
+                eventAnimated = true;
+
+                // create particles
+                createParticles(22);
+
+                const tl = anime.timeline({
+                    easing: 'easeOutExpo',
+                    duration: 700
+                });
+
+                // scanline fade in (gives hologram reveal)
+                tl.add({
+                    targets: '.scanline',
+                    opacity: [0, 0.12],
+                    duration: 500
+                });
+
+                // polymorphs pop and neon glow pulse
+                tl.add({
+                    targets: '.polymorph',
+                    translateY: [
+                        { value: -20, duration: 400 },
+                        { value: 0, duration: 600 }
+                    ],
+                    opacity: [0, 1],
+                    scale: [
+                        { value: 0.9, duration: 300 },
+                        { value: 1.02, duration: 300 },
+                        { value: 1, duration: 400 }
+                    ],
+                    delay: anime.stagger(120),
+                    duration: 900
+                }, '-=200');
+
+                // a quick neon stroke animation (stroke-dash to make it look electronic)
+                tl.add({
+                    targets: '.polymorph',
+                    filter: ['blur(6px)', 'blur(0px)'],
+                    duration: 900
+                }, '-=700');
+
+                // content reveal
+                tl.add({
+                    targets: '#content',
+                    translateY: [-50, 0],
+                    opacity: [0, 1],
+                    duration: 700
+                }, '-=500');
+
+                // CTA micro-bounce & glow loop
+                tl.add({
+                    targets: '#cta',
+                    translateY: [8, 0],
+                    scale: [0.985, 1],
+                    duration: 600
+                }, '-=350');
+
+                // launch particle loop when timeline finishes:
+                tl.finished.then(() => startParticlesLoop());
+            }
+
+            // animate continuous subtle neon pulsing on polygons
+            function startNeonPulse() {
+                anime({
+                    targets: '.neon-1',
+                    translateX: [0, -12, 0],
+                    rotate: [-2, 2, -1],
+                    duration: 4200,
+                    easing: 'easeInOutSine',
+                    loop: true
+                });
+                anime({
+                    targets: '.neon-2',
+                    translateX: [0, 10, 0],
+                    rotate: [1, -1.5, 0],
+                    duration: 5200,
+                    easing: 'easeInOutSine',
+                    loop: true
+                });
+
+                // color pulse for neon fill using CSS variable
+                anime({
+                    targets: '.polymorph',
+                    opacity: [0.8, 1, 0.9],
+                    duration: 1600,
+                    easing: 'easeInOutSine',
+                    direction: 'alternate',
+                    loop: true,
+                    delay: anime.stagger(200)
+                });
+            }
+
+            // scroll observer toggles: when events enters viewport => desaturate background image
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+                        // add BW class to body (which will target ::before image)
+                        document.body.classList.add('bw');
+                        // trigger events animation
+                        animateEventsEntrance();
+                        startNeonPulse();
+                    } else {
+                        // when leaving events we remove BW (restores color)
+                        document.body.classList.remove('bw');
+                    }
+                });
+            }, { threshold: [0, 0.15, 0.35, 0.6] });
+
+            if (eventsSection) observer.observe(eventsSection);
+
+            // CTA - show extra info
+            cta.addEventListener('click', () => {
+                content.classList.add('active');
+                closeBtn.hidden = false;
+                // pop a short ripple on click
+                anime({
+                    targets: '#content',
+                    boxShadow: ['0 8px 32px rgba(0,0,0,0.2)', '0 18px 64px rgba(0,0,0,0.45)'],
+                    duration: 450,
+                    easing: 'easeOutQuad'
+                });
             });
-        }, { threshold: [0, 0.15, 0.35, 0.6] });
-
-        if (eventsSection) observer.observe(eventsSection);
-
-        // CTA - show extra info
-        cta.addEventListener('click', () => {
-            content.classList.add('active');
-            closeBtn.hidden = false;
-            // pop a short ripple on click
-            anime({
-                targets: '#content',
-                boxShadow: ['0 8px 32px rgba(0,0,0,0.2)', '0 18px 64px rgba(0,0,0,0.45)'],
-                duration: 450,
-                easing: 'easeOutQuad'
+            closeBtn.addEventListener('click', () => {
+                content.classList.remove('active');
+                closeBtn.hidden = true;
             });
-        });
-        closeBtn.addEventListener('click', () => {
-            content.classList.remove('active');
-            closeBtn.hidden = true;
-        });
 
-        // Clean up on page unload (stop loops)
-        window.addEventListener('pagehide', () => stopParticlesLoop());
-    })();
+            // Clean up on page unload (stop loops)
+            window.addEventListener('pagehide', () => stopParticlesLoop());
+        })();
     </script>
 </body>
+
 </html>

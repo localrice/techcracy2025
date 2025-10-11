@@ -1,38 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Techcracy 2025</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-      <div class="navigation">
-            <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+    <div class="loader">
+        <div class="counter">0</div>
+    </div>
+    <script>
+        window.onload = function () {
+            // Only show loader once per session
+            if (!sessionStorage.getItem('loaderDisplayed')) {
+                sessionStorage.setItem('loaderDisplayed', 'true');
+            } else {
+                const loader = document.querySelector('.loader');
+                if (loader) loader.style.display = 'none';
+            }
+        };
 
-            <label for="navi-toggle" class="navigation__button">
-                <span class="navigation__icon">&nbsp;</span>
-            </label>
+        document.addEventListener('DOMContentLoaded', () => {
+            const counter = document.querySelector('.counter');
+            const loader = document.querySelector('.loader');
 
-            <div class="navigation__background">&nbsp;</div>
+            // Multi-language shuffle logic
+            function shuffleTextSequence(texts, duration, callback) {
+                let index = 0;
 
-            <nav class="navigation__nav">
-                <ul class="navigation__list">
-                    <li class="navigation__item" ><a href="#home" class="navigation__link">Home</a></li>
-                    <li class="navigation__item"><a href="#events" class="navigation__link">Events</a></li>
-                    <li class="navigation__item"><a href="#team" class="navigation__link">Team</a></li>
-                    <li class="navigation__item"><a href="#merchandise" class="navigation__link">MERCHANDISE</a></li>
+                function shuffleNext() {
+                    if (index >= texts.length) {
+                        if (callback) callback();
+                        return;
+                    }
 
-            </nav>
-            <script>
+                    let i = 0;
+                    const currentText = texts[index];
+                    const shuffleInterval = setInterval(() => {
+                        if (i < duration) {
+                            counter.innerHTML = Math.random().toString(36).substring(2, 8);
+                            i++;
+                        } else {
+                            clearInterval(shuffleInterval);
+                            counter.innerHTML = currentText;
+                            index++;
+                            setTimeout(shuffleNext, 800); // Delay before next language
+                        }
+                    }, 100);
+                }
+
+                shuffleNext();
+            }
+
+            function removeLetters() {
+                let text = counter.innerHTML;
+                const removeInterval = setInterval(() => {
+                    if (text.length > 0) {
+                        text = text.substring(0, text.length - 1);
+                        counter.innerHTML = text;
+                    } else {
+                        clearInterval(removeInterval);
+                        fadeOutLoader();
+                    }
+                }, 100);
+            }
+
+            function fadeOutLoader() {
+                gsap.to(loader, {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    duration: 1,
+                });
+            }
+
+            // Animate counter to 100%
+            gsap.to(counter, {
+                innerHTML: '100%',
+                duration: 3,
+                snap: 'innerHTML',
+                ease: 'none',
+                onComplete: () => {
+                    setTimeout(() => {
+                        // Show Techcracy in different languages
+                        shuffleTextSequence(
+                            ['テククラシー', 'টেকক্রেসি', 'TECHCRAZY/24'],
+                            20,
+                            () => {
+                                setTimeout(removeLetters, 500);
+                            }
+                        );
+                    }, 500);
+                },
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+
+    <div class="navigation">
+        <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+        <label for="navi-toggle" class="navigation__button">
+            <span class="navigation__icon">&nbsp;</span>
+        </label>
+
+        <div class="navigation__background">&nbsp;</div>
+
+        <nav class="navigation__nav">
+            <ul class="navigation__list">
+                <li class="navigation__item"><a href="#home" class="navigation__link">Home</a></li>
+                <li class="navigation__item"><a href="#events" class="navigation__link">Events</a></li>
+                <li class="navigation__item"><a href="team.html" class="navigation__link">Team</a></li>
+                <li class="navigation__item"><a href="#merchandise" class="navigation__link">MERCHANDISE</a></li>
+
+        </nav>
+    </div>
+    <script>
         document.querySelectorAll('.navigation__link').forEach(link => {
-    link.addEventListener('click', () => {
-      document.querySelector('.navigation__checkbox').checked = false;
-    });
-  });
-</script>
-        </div>
+            link.addEventListener('click', () => {
+                document.querySelector('.navigation__checkbox').checked = false;
+            });
+        });
+    </script>
+    </div>
     <header id="home">
         <h1>2025</h1>
         <h2 id="glitch-text">
@@ -59,186 +152,191 @@
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
-    header {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        /* background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%); */
-        position: relative;
-        overflow: hidden;
-    }
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%); */
+            position: relative;
+            overflow: hidden;
+        }
 
-    #glitch-text {
-        position: relative;
-        display: inline-block;
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    .glitch-layer {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        pointer-events: none;
-        user-select: none;
-    }
-    #glitch-main {
-        position: relative;
-        color: #fff;
-        z-index: 3;
-        pointer-events: auto;
-        user-select: auto;
-    }
-    .glitch-r {
-        color: #f0f;
-        z-index: 2;
-        opacity: 0.7;
-        text-shadow: 2px 0 6px #f0f, 0 0 12px #f0f;
-        mix-blend-mode: lighten;
-    }
-    .glitch-b {
-        color: #0ff;
-        z-index: 1;
-        opacity: 0.7;
-        text-shadow: -2px 0 6px #0ff, 0 0 12px #0ff;
-        mix-blend-mode: lighten;
-    }
-    #events {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        /* padding: px 20px; */
-    }
+        #glitch-text {
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            transform: scale(0.8);
+        }
 
-    #events-title {
-        color: transparent;
-        -webkit-text-stroke: 6px #fff;
-        text-stroke: 6px #fff;
-        font-size: 6rem;
-        margin: 0 0 20px 0;
-        font-weight: 900;
-        letter-spacing: 0.2em;
-        text-shadow:
-            0 0 5px #fff,
-            0 0 10px #fff;
-        align-self: center;
-    }
+        .glitch-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            user-select: none;
+        }
 
+        #glitch-main {
+            position: relative;
+            color: #fff;
+            z-index: 3;
+            pointer-events: auto;
+            user-select: auto;
+        }
+
+        .glitch-r {
+            color: #f0f;
+            z-index: 2;
+            opacity: 0.7;
+            text-shadow: 2px 0 6px #f0f, 0 0 12px #f0f;
+            mix-blend-mode: lighten;
+        }
+
+        .glitch-b {
+            color: #0ff;
+            z-index: 1;
+            opacity: 0.7;
+            text-shadow: -2px 0 6px #0ff, 0 0 12px #0ff;
+            mix-blend-mode: lighten;
+        }
+
+        #events {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            /* padding: px 20px; */
+        }
+
+        #events-title {
+            color: transparent;
+            -webkit-text-stroke: 6px #fff;
+            text-stroke: 6px #fff;
+            font-size: 6rem;
+            margin: 0 0 20px 0;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-shadow:
+                0 0 5px #fff,
+                0 0 10px #fff;
+            align-self: center;
+        }
     </style>
     <script>
-    // Cyberpunk entrance animation
-    window.addEventListener('DOMContentLoaded', () => {
-        const glitchText = document.getElementById('glitch-text');
-        const main = document.getElementById('glitch-main');
-        const r = document.querySelector('.glitch-r');
-        const b = document.querySelector('.glitch-b');
-        if (!glitchText || !main || !r || !b) return;
+        // Cyberpunk entrance animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const glitchText = document.getElementById('glitch-text');
+            const main = document.getElementById('glitch-main');
+            const r = document.querySelector('.glitch-r');
+            const b = document.querySelector('.glitch-b');
+            if (!glitchText || !main || !r || !b) return;
 
-        // Animate the group: fade in, scale up, flicker colors
-        anime.timeline()
-            .add({
-                targets: '#glitch-text',
-                opacity: [0, 1],
-                scale: [0.8, 1.05],
-                easing: 'easeOutExpo',
-                duration: 600
-            })
-            .add({
-                targets: '#glitch-text',
-                scale: [1.05, 1],
-                easing: 'easeOutBack',
-                duration: 300
-            }, '-=200')
-            .add({
-                targets: [main, r, b],
-                opacity: [
-                    { value: 0.6, duration: 60 },
-                    { value: 1, duration: 60 },
-                    { value: 0.8, duration: 60 },
-                    { value: 1, duration: 60 }
-                ],
-                easing: 'steps(2)',
-                duration: 240
-            }, '-=200');
+            // Animate the group: fade in, scale up, flicker colors
+            anime.timeline()
+                .add({
+                    targets: '#glitch-text',
+                    opacity: [0, 1],
+                    scale: [0.8, 1.05],
+                    easing: 'easeOutExpo',
+                    duration: 600
+                })
+                .add({
+                    targets: '#glitch-text',
+                    scale: [1.05, 1],
+                    easing: 'easeOutBack',
+                    duration: 300
+                }, '-=200')
+                .add({
+                    targets: [main, r, b],
+                    opacity: [
+                        { value: 0.6, duration: 60 },
+                        { value: 1, duration: 60 },
+                        { value: 0.8, duration: 60 },
+                        { value: 1, duration: 60 }
+                    ],
+                    easing: 'steps(2)',
+                    duration: 240
+                }, '-=200');
 
 
-    });
+        });
 
-    // Cyberpunk glitch effect using anime.js and CSS
-    function cyberpunkGlitch() {
-        const r = document.querySelector('.glitch-r');
-        const b = document.querySelector('.glitch-b');
-        const main = document.getElementById('glitch-main');
-        if (!r || !b || !main) return;
+        // Cyberpunk glitch effect using anime.js and CSS
+        function cyberpunkGlitch() {
+            const r = document.querySelector('.glitch-r');
+            const b = document.querySelector('.glitch-b');
+            const main = document.getElementById('glitch-main');
+            if (!r || !b || !main) return;
 
-        function doGlitch() {
-            anime({
-                targets: r,
-                translateX: [
-                    { value: anime.random(-8, 8), duration: 40 },
-                    { value: anime.random(-16, 16), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                translateY: [
-                    { value: anime.random(-2, 2), duration: 40 },
-                    { value: anime.random(-4, 4), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                opacity: [
-                    { value: 1, duration: 40 },
-                    { value: 0.7, duration: 40 },
-                    { value: 0.7, duration: 60 }
-                ],
-                easing: 'steps(2)',
-                complete: () => {}
-            });
-            anime({
-                targets: b,
-                translateX: [
-                    { value: anime.random(-8, 8), duration: 40 },
-                    { value: anime.random(-16, 16), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                translateY: [
-                    { value: anime.random(-2, 2), duration: 40 },
-                    { value: anime.random(-4, 4), duration: 40 },
-                    { value: 0, duration: 60 }
-                ],
-                opacity: [
-                    { value: 1, duration: 40 },
-                    { value: 0.7, duration: 40 },
-                    { value: 0.7, duration: 60 }
-                ],
-                easing: 'steps(2)',
-                complete: () => {}
-            });
-            anime({
-                targets: main,
-                opacity: [
-                    { value: 0.7, duration: 30 },
-                    { value: 1, duration: 70 }
-                ],
-                easing: 'steps(2)',
-                complete: () => {}
-            });
-            setTimeout(doGlitch, 600 + Math.random() * 400);
+            function doGlitch() {
+                anime({
+                    targets: r,
+                    translateX: [
+                        { value: anime.random(-8, 8), duration: 40 },
+                        { value: anime.random(-16, 16), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    translateY: [
+                        { value: anime.random(-2, 2), duration: 40 },
+                        { value: anime.random(-4, 4), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    opacity: [
+                        { value: 1, duration: 40 },
+                        { value: 0.7, duration: 40 },
+                        { value: 0.7, duration: 60 }
+                    ],
+                    easing: 'steps(2)',
+                    complete: () => { }
+                });
+                anime({
+                    targets: b,
+                    translateX: [
+                        { value: anime.random(-8, 8), duration: 40 },
+                        { value: anime.random(-16, 16), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    translateY: [
+                        { value: anime.random(-2, 2), duration: 40 },
+                        { value: anime.random(-4, 4), duration: 40 },
+                        { value: 0, duration: 60 }
+                    ],
+                    opacity: [
+                        { value: 1, duration: 40 },
+                        { value: 0.7, duration: 40 },
+                        { value: 0.7, duration: 60 }
+                    ],
+                    easing: 'steps(2)',
+                    complete: () => { }
+                });
+                anime({
+                    targets: main,
+                    opacity: [
+                        { value: 0.7, duration: 30 },
+                        { value: 1, duration: 70 }
+                    ],
+                    easing: 'steps(2)',
+                    complete: () => { }
+                });
+                setTimeout(doGlitch, 600 + Math.random() * 400);
+            }
+            doGlitch();
         }
-        doGlitch();
-    }
-    cyberpunkGlitch();
+        cyberpunkGlitch();
 
-    // Scroll-based background grayscale effect
-    window.addEventListener('scroll', () => {
-        const events = document.getElementById('events');
-        if (!events) return;
-        const rect = events.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        // Progress from 0 to 1 as events section enters and fills the viewport
-        const progress = Math.min(1, Math.max(0, (windowHeight - rect.top) / windowHeight));
-        document.body.style.setProperty('--grayscale', progress);
-    });
+        // Scroll-based background grayscale effect
+        window.addEventListener('scroll', () => {
+            const events = document.getElementById('events');
+            if (!events) return;
+            const rect = events.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            // Progress from 0 to 1 as events section enters and fills the viewport
+            const progress = Math.min(1, Math.max(0, (windowHeight - rect.top) / windowHeight));
+            document.body.style.setProperty('--grayscale', progress);
+        });
     </script>
 
     <footer class="wrapper">
@@ -248,16 +346,29 @@
         </div>
         <div class="info">
             <p>
-            Techcracy 2025 – The Annual Technical Fest of Central Institute of Technology, Kokrajhar.
-Dive into a world of innovation, creativity, and competition! From hackathons, technical quizzes, and UI design challenges to mobile gaming tournaments, dance, and sports, Techcracy brings together the best blend of technology and talent. Learn from experts, showcase your skills, and experience the thrill of discovery. Don’t miss your chance to be a part of this celebration of knowledge, fun, and futuristic ideas.
+                Techcracy 2025 – The Annual Technical Fest of Central Institute of Technology, Kokrajhar.
+                Dive into a world of innovation, creativity, and competition! From hackathons, technical quizzes, and UI
+                design challenges to mobile gaming tournaments, dance, and sports, Techcracy brings together the best
+                blend of technology and talent. Learn from experts, showcase your skills, and experience the thrill of
+                discovery. Don’t miss your chance to be a part of this celebration of knowledge, fun, and futuristic
+                ideas.
             </p>
         </div>
         <div class="social">
             <h3>Follow Us:</h3>
-            <a href="#"><svg id="instagram" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
-            
-            <a href="#"><svg id="youtube" viewBox="0 0 576 512"><path d="M549.7 124.1C543.5 100.4 524.9 81.8 501.4 75.5 458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5C51.2 81.8 32.7 100.4 26.4 124.1 15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8 42.6 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6l0-162.4 142.7 81.2-142.7 81.2z"/></svg></a>
-            <a href="#"><svg id="facebook" viewBox="0 0 512 512"><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5l0-170.3-52.8 0 0-78.2 52.8 0 0-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4l0 70.8c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2l0 27.8 83.6 0-14.4 78.2-69.3 0 0 175.9C413.8 494.8 512 386.9 512 256z"/></svg></a>
+            <a href="#"><svg id="instagram" viewBox="0 0 448 512">
+                    <path
+                        d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                </svg></a>
+
+            <a href="#"><svg id="youtube" viewBox="0 0 576 512">
+                    <path
+                        d="M549.7 124.1C543.5 100.4 524.9 81.8 501.4 75.5 458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5C51.2 81.8 32.7 100.4 26.4 124.1 15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8 42.6 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6l0-162.4 142.7 81.2-142.7 81.2z" />
+                </svg></a>
+            <a href="#"><svg id="facebook" viewBox="0 0 512 512">
+                    <path
+                        d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5l0-170.3-52.8 0 0-78.2 52.8 0 0-33.7c0-87.1 39.4-127.5 125-127.5 16.2 0 44.2 3.2 55.7 6.4l0 70.8c-6-.6-16.5-1-29.6-1-42 0-58.2 15.9-58.2 57.2l0 27.8 83.6 0-14.4 78.2-69.3 0 0 175.9C413.8 494.8 512 386.9 512 256z" />
+                </svg></a>
         </div>
         <div class="quicklinks">
             <h3>Quick Links:</h3>
@@ -274,10 +385,10 @@ Dive into a world of innovation, creativity, and competition! From hackathons, t
         </div>
         <div class="credits">
             <p id="copyright">&copy; 2025 Techcracy</p>
-            <p>Designed and Developed by <a href="https://www.linkedin.com/in/kinjal-kavish-boro-b014aa317/">Kinjal Kavish Boro</a> and <a href="https://www.linkedin.com/in/dibyojit-paul/" >Dibyojit Paul</a></p>
+            <p>Designed and Developed by <a href="https://www.linkedin.com/in/kinjal-kavish-boro-b014aa317/">Kinjal
+                    Kavish Boro</a> and <a href="https://www.linkedin.com/in/dibyojit-paul/">Dibyojit Paul</a></p>
         </div>
     </footer>
 </body>
+
 </html>
-
-
