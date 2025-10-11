@@ -12,6 +12,12 @@
   font-style: normal;
 }
 @font-face {
+  font-family: "scrabondhara";
+  src: url("./fonts/FN\ Srabondhara\ Unicode.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
   font-family: "FiraSansCondensed";
   src: url("./fonts/FiraSansCondensed-Black.ttf") format("truetype");
   font-weight: bold;
@@ -22,6 +28,12 @@
   src: url("./fonts/Volkhov-BoldItalic.ttf") format("truetype");
   font-weight: bold;
   font-style: italic;
+}
+@font-face {
+  font-family: "NotoSerifJP";
+  src: url("./fonts/NotoSerifJP-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 :root {
   --base-font-size: 1rem;
@@ -96,9 +108,9 @@ body::before {
   height: 100vh;
   font-size: 70px;
   /* font-family: 'Orbitron', sans-serif; */
-  font-family: "BebasNeue", monospace;
+  font-family: "BebasNeue", "NotoSerifJP", "scrabondhara", monospace;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .counter {
     font-size: 50px;
   }
@@ -407,7 +419,7 @@ header h2 {
 #close:hover {
   background: rgba(182, 108, 141, 0.3);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #content h1 {
     font-size: 1.5rem;
   }
@@ -821,6 +833,23 @@ header h2 {
   border-bottom: 2px solid #000;
   clip-path: polygon(30% 0, 0 21%, 0 100%, 100% 100%, 100% 0);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .team-section {
+    height: auto;
+  }
+  .team-section .cards {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .team-section {
+    height: auto;
+    margin-bottom: 50px;
+    justify-items: center;
+  }
 }
 
 /* Footer styles  */
