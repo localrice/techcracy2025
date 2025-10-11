@@ -98,6 +98,11 @@ body::before {
   /* font-family: 'Orbitron', sans-serif; */
   font-family: "BebasNeue", monospace;
 }
+@media (max-width: 600px) {
+  .counter {
+    font-size: 50px;
+  }
+}
 
 .navigation__checkbox {
   display: none;
