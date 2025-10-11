@@ -4,7 +4,7 @@
   font-weight: bold;
   font-style: normal;
 }
-@import url("https://fonts.googleapis.com/css2?family=Special+Elite&family=VT323&display=swap");
+
 @font-face {
   font-family: "BebasNeue";
   src: url("./fonts/BebasNeue-Regular.ttf") format("truetype");
@@ -96,7 +96,7 @@ body::before {
   height: 100vh;
   font-size: 70px;
   /* font-family: 'Orbitron', sans-serif; */
-  font-family: "VT323", monospace;
+  font-family: "BebasNeue", monospace;
 }
 
 .navigation__checkbox {
