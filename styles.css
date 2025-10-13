@@ -55,6 +55,18 @@ body {
   justify-content: center;
   align-items: center;
 }
+html,
+body {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -64,7 +76,7 @@ body::before {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: url("idk.jpg") no-repeat;
+  background: url("./public/idk.jpg") no-repeat;
   background-size: 140%;
   background-position: 0% 0%;
   filter: blur(4px) grayscale(var(--grayscale, 0));
@@ -658,9 +670,10 @@ header h2 {
   position: relative;
   width: 100vw;
   height: 300vh;
-  margin-left: 20px;
   color: #fff;
   text-align: center;
+  justify-content: center;
+  justify-items: center;
   margin-top: 150px;
   font-family: "LapsusProBold", sans-serif;
 }
@@ -849,6 +862,100 @@ header h2 {
     height: auto;
     margin-bottom: 50px;
     justify-items: center;
+  }
+}
+#merchandiseDemo {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0, 0, 0, 0);
+  color: #fff;
+  position: relative;
+  font-family: "LapsusProBold", sans-serif;
+  text-align: center;
+}
+
+#merchandiseDemo h1 {
+  font-family: "BebasNeue", sans-serif;
+  margin-bottom: 20px;
+}
+.merch-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 100px;
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+.merch-container .merch-item {
+  position: relative;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 400px;
+  overflow: hidden;
+}
+.merch-container .merch-item img {
+  object-position: center;
+  transform: scale(1.4);
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.4s linear;
+}
+.merch-container .merch-item:hover img {
+  transform: scale(1.2);
+}
+.merch-container .merch-item div {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: rgb(99, 2, 255);
+  transition: background 0.8s;
+}
+.merch-container .merch-item:hover div {
+  background-color: transparent;
+}
+
+.merch-container .merch-item:hover h3 {
+  position: absolute;
+  bottom: 15px;
+
+  text-shadow: 2px 2px 3px red, 0 0 2em blue, 0 0 0.4em blue;
+  font-size: 2.5rem;
+}
+.merch-container .merch-item h3 {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d0e2aa;
+  text-shadow: 0;
+  font-size: 2rem;
+  font-family: "BebasNeue", sans-serif;
+  transition: font-size 0.4s, bottom 0.4s, text-shadow 0.4s;
+}
+@media (max-width: 768px) {
+  #merchandiseDemo h1 {
+    font-size: 2.5rem;
+  }
+  .merch-container .merch-item {
+    width: 150px;
+    font-size: 1rem;
+  }
+  .merch-container .merch-item h2 {
+    font-size: 1.2rem;
+  }
+  .merch-container .merch-item p {
+    font-size: 0.9rem;
   }
 }
 
