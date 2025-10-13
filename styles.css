@@ -879,7 +879,14 @@ header h2 {
 
 #merchandiseDemo h1 {
   font-family: "BebasNeue", sans-serif;
-  margin-bottom: 20px;
+  -webkit-text-stroke: 6px #fff;
+  text-stroke: 6px #fff;
+  font-size: 6rem;
+  margin: 0 0 20px 0;
+  font-weight: 100;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+  align-self: center;
 }
 .merch-container {
   display: flex;
@@ -938,6 +945,7 @@ header h2 {
   left: 50%;
   transform: translateX(-50%);
   color: #d0e2aa;
+  text-shadow: 0 0 5px #000, 0 0 10px #000;
   text-shadow: 0;
   font-size: 2rem;
   font-family: "BebasNeue", sans-serif;
