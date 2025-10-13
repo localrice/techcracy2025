@@ -898,7 +898,7 @@ header h2 {
 }
 .merch-container .merch-item {
   position: relative;
-  border-radius: 8px;
+  border-radius: 15px;
   text-align: center;
   font-size: 1.2rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -924,7 +924,7 @@ header h2 {
   left: 0px;
   height: 100%;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 15px;
   background: rgb(99, 2, 255);
   transition: background 0.8s;
 }
@@ -954,16 +954,17 @@ header h2 {
 @media (max-width: 768px) {
   #merchandiseDemo h1 {
     font-size: 2.5rem;
+    margin-bottom: 30px;
   }
   .merch-container .merch-item {
     width: 350px;
     font-size: 0.5rem;
   }
   .merch-container .merch-item h3 {
-    font-size: 1.2rem;
+    font-size: 2.4rem;
   }
   .merch-container .merch-item:hover h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
