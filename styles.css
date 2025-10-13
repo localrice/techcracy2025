@@ -126,6 +126,16 @@ body::before {
   .counter {
     font-size: 50px;
   }
+  #events #events-title {
+    color: white;
+    font-family: "BebasNeue", sans-serif;
+    -webkit-text-stroke: 0px;
+    text-stroke: 0px;
+    font-size: 5rem;
+    margin-bottom: 30px;
+    text-shadow: 0px;
+    align-self: center;
+  }
 }
 
 .navigation__checkbox {
@@ -965,6 +975,15 @@ header h2 {
   }
   .merch-container .merch-item:hover h3 {
     font-size: 2rem;
+  }
+  #merchandiseDemo h1 {
+    font-family: "BebasNeue", sans-serif;
+    -webkit-text-stroke: 0px;
+    text-stroke: 0px;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0px;
+    align-self: center;
   }
 }
 
