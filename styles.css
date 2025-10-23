@@ -990,6 +990,84 @@ header h2 {
   }
 }
 
+.designTechcracy {
+  height: 650px;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: 25px;
+  justify-content: space-evenly;
+  align-items: center;
+  background: rgb(0, 0, 0, 0);
+  color: #fff;
+  position: relative;
+  font-family: "LapsusProBold", sans-serif;
+  text-align: center;
+}
+
+.designTechcracy .leftDesign,
+.designTechcracy .rightDesign {
+  width: 100px;
+  height: 80%;
+}
+.designTechcracy .leftDesign {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 3fr 1fr 50px;
+  gap: 10px;
+  grid-template-areas:
+    "line"
+    "text"
+    "circle";
+}
+.designTechcracy .rightDesign {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 3fr 1fr 50px;
+  gap: 10px;
+  grid-template-areas:
+    "line"
+    "text"
+    "circle";
+}
+@media (max-width: 1200px) {
+  .designTechcracy .leftDesign,
+  .designTechcracy .rightDesign {
+    width: 0px;
+  }
+}
+
+.designTechcracy .centerDesign {
+  width: 850px;
+  height: 80%;
+  overflow: hidden;
+}
+.designTechcracy .line {
+  height: 100%;
+  width: 8px;
+  border-right: 3px solid #0040ff;
+  border-left: 5px solid rgb(255, 0, 230);
+  border-bottom: 5px solid rgb(255, 0, 230);
+  grid-area: line;
+}
+.designTechcracy .leftDesign .line {
+  border-start-end-radius: 50px;
+}
+.designTechcracy .rightDesign .line {
+  border-start-start-radius: 50px;
+}
+
+.designTechcracy .circle {
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  background: #0040ff;
+}
+
+.designTechcracy .text {
+  writing-mode: sideways-lr;
+  font-size: 2rem;
+}
 /* Footer styles  */
 footer .info {
   grid-area: info;
