@@ -1133,6 +1133,9 @@ header h2 {
   transition: font-size 0.4s, bottom 0.4s, text-shadow 0.4s;
 }
 @media (max-width: 768px) {
+  #merchandiseDemo {
+    margin-top: 100px;
+  }
   #merchandiseDemo h1 {
     font-size: 2.5rem;
     margin-bottom: 30px;
