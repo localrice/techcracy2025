@@ -478,7 +478,6 @@ header h2 {
   position: relative;
   font-family: "LapsusProBold", sans-serif;
   text-align: center;
-  overflow: hidden;
 }
 
 #events-title {
@@ -1134,9 +1133,9 @@ header h2 {
   font-family: "BebasNeue", sans-serif;
   transition: font-size 0.4s, bottom 0.4s, text-shadow 0.4s;
 }
-@media (max-width: 768px) and (max-height: 880px) {
+@media (max-width: 768px) and (max-height: 950px) {
   .empty {
-    height: 30vh;
+    height: 40vh;
     width: 100%;
   }
 }
