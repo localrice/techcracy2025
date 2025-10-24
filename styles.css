@@ -602,8 +602,47 @@ header h2 {
   grid-column: 3 / span 1;
 }
 .team-section .cards .card-16 {
+  grid-row: 6 / span 2;
+  grid-column: 4 / span 1;
+}
+.team-section .cards .card-17 {
+  grid-row: 5 / span 2;
+  grid-column: 5 / span 1;
+}
+
+.team-section .cards .card-18 {
+  grid-row: 7 / span 2;
+  grid-column: 5 / span 1;
+}
+
+.team-section .cards .card-19 {
+  grid-row: 6 / span 2;
+  grid-column: 6 / span 1;
+}
+
+.team-section .cards .card-20 {
+  grid-row: 8 / span 2;
+  grid-column: 6 / span 1;
+}
+
+.team-section .cards .card-21 {
+  grid-row: 5 / span 2;
+  grid-column: 7 / span 1;
+}
+
+.team-section .cards .card-22 {
+  grid-row: 7 / span 2;
+  grid-column: 7 / span 1;
+}
+
+.team-section .cards .card-23 {
   grid-row: 8 / span 2;
   grid-column: 2 / span 1;
+}
+
+.team-section .cards .card-24 {
+  grid-row: 8 / span 2;
+  grid-column: 4 / span 1;
 }
 
 .card {
@@ -682,7 +721,7 @@ header h2 {
 .team-section {
   position: relative;
   width: 100vw;
-  height: 300vh;
+  height: 180vh;
   color: #fff;
   text-align: center;
   justify-content: center;
@@ -690,7 +729,9 @@ header h2 {
   margin-top: 150px;
   font-family: "LapsusProBold", sans-serif;
 }
-
+#team {
+  height: 250vh;
+}
 .card-front .name h2 {
   font-size: 1.05rem;
   white-space: nowrap;
@@ -762,6 +803,16 @@ header h2 {
   rotate: 10deg;
 }
 .card-front:hover .links .github {
+  animation: hoverAnimation 0.3s ease-in-out infinite;
+}
+.card-front .links .email {
+  width: 21.875px;
+  height: 20px;
+  grid-row: 2 / span 1;
+  grid-column: 8 / span 1;
+  rotate: 10deg;
+}
+.card-front:hover .links .email {
   animation: hoverAnimation 0.3s ease-in-out infinite;
 }
 .card-front:hover .links .instagram {
@@ -865,9 +916,6 @@ header h2 {
 .team-section .cards .team-title {
   grid-area: 1/1/3/4;
   font-size: 4rem;
-  align-content: center;
-  text-shadow: rgb(112, 2, 255) 0.5rem 0.8rem 0.5rem,
-    0.5rem 0.4rem 0.4rem rgb(255, 2, 217);
 }
 
 @media (max-width: 768px) {
@@ -885,6 +933,12 @@ header h2 {
     grid-template-rows: 400px repeat(16, 450px);
     grid-gap: 20px;
   }
+  #team {
+    height: auto;
+  }
+  #team .cards {
+    grid-template-rows: 400px repeat(24, 450px);
+  }
   .team-section {
     height: auto;
     margin-bottom: 50px;
@@ -894,7 +948,7 @@ header h2 {
     transform: scale(1.5);
   }
   .team-section .cards .team-title {
-    font-size: 2.8rem;
+    font-size: 3rem;
     width: 200px;
     justify-content: start;
     grid-area: 1/1/2/2;
@@ -948,6 +1002,30 @@ header h2 {
   }
   .team-section .cards .card-16 {
     grid-area: 17/1/18/2;
+  }
+  .team-section .cards .card-17 {
+    grid-area: 18/1/19/2;
+  }
+  .team-section .cards .card-18 {
+    grid-area: 19/1/20/2;
+  }
+  .team-section .cards .card-19 {
+    grid-area: 20/1/21/2;
+  }
+  .team-section .cards .card-20 {
+    grid-area: 21/1/22/2;
+  }
+  .team-section .cards .card-21 {
+    grid-area: 22/1/23/2;
+  }
+  .team-section .cards .card-22 {
+    grid-area: 23/1/24/2;
+  }
+  .team-section .cards .card-23 {
+    grid-area: 24/1/25/2;
+  }
+  .team-section .cards .card-24 {
+    grid-area: 25/1/26/2;
   }
   .team-section .cards .card-back {
     height: 300px;
@@ -1014,7 +1092,7 @@ header h2 {
   height: 100%;
   width: 100%;
   border-radius: 15px;
-  background: rgb(99, 2, 255);
+  background: #1a1c1e;
   transition: background 0.8s;
 }
 .merch-container .merch-item:hover div {
@@ -1049,6 +1127,9 @@ header h2 {
     width: 350px;
     font-size: 0.5rem;
   }
+  .merch-container .merch-item div {
+    background: transparent;
+  }
   .merch-container .merch-item h3 {
     font-size: 2.4rem;
   }
@@ -1065,7 +1146,7 @@ header h2 {
     align-self: center;
   }
 }
-
+/* 
 .designTechcracy {
   height: 650px;
   max-width: 1000px;
@@ -1143,7 +1224,7 @@ header h2 {
 .designTechcracy .text {
   writing-mode: sideways-lr;
   font-size: 2rem;
-}
+} */
 /* Footer styles  */
 footer .info {
   grid-area: info;
