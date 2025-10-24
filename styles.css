@@ -478,6 +478,7 @@ header h2 {
   position: relative;
   font-family: "LapsusProBold", sans-serif;
   text-align: center;
+  overflow: hidden;
 }
 
 #events-title {
@@ -517,7 +518,7 @@ header h2 {
 
 .event {
   background: rgba(255, 255, 255, 0.1);
-  padding: 1rem;
+  padding: 50px;
   border-radius: 8px;
   text-align: center;
   font-size: 1.2rem;
@@ -1056,6 +1057,7 @@ header h2 {
   position: relative;
   font-family: "LapsusProBold", sans-serif;
   text-align: center;
+  overflow: hidden;
 }
 
 #merchandiseDemo h1 {
