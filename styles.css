@@ -1381,12 +1381,12 @@ footer .credits p a {
   }
   .wrapper {
     grid-template-columns: 2fr;
-    grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr 60px;
+    grid-template-rows: 0.5fr 1fr 150px 0.5fr 60px;
     grid-template-areas:
       "logo logo"
       "info info"
       "social quicklinks"
-      "contact quicklinks"
+      "contact contact"
       "credits credits";
   }
 }
