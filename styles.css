@@ -490,7 +490,6 @@ header h2 {
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
-  padding: 0 2rem;
   gap: 2rem;
 }
 
@@ -1076,7 +1075,6 @@ header h2 {
   justify-content: center;
   gap: 100px;
   max-width: 1200px;
-  padding: 0 2rem;
 }
 .merch-container .merch-item {
   position: relative;
